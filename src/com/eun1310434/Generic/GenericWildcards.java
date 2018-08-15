@@ -1,14 +1,30 @@
-/**
- * 27.02.2018
- * eun1310434@naver.com
- * https://blog.naver.com/eun1310434
- * 참고) 쉽게 배우는 소프트웨어 공학, Java Documentation, 헬로 자바 프로그래밍
-*/
+/*==================================================================================================
+□ INFORMATION
+  ○ Data : 15.08.2018
+  ○ Mail : eun1310434@naver.com
+  ○ WebPage : https://eun1310434.github.io/
+  ○ Reference
+     - Hello Java Programming
+     
+□ FUNCTION
+  ○ 
+   
+□ Study
+  ○ Upper Bounded WildCard
+    - <? extends "ClassName" OR "InterfaceName" OR "TypeParameter">
+
+  ○ Lower Bounded WildCard
+    - <? super "ClassName" OR "InterfaceName" OR "TypeParameter">
+
+  ○ Unbounded WildCard
+    - <?>
+    
+==================================================================================================*/
 
 package com.eun1310434.Generic;
-class GenericWildcards_C<T> {
+class GenericWildcards_Class<T> {
 	private T type;
-	public GenericWildcards_C(T type) {
+	public GenericWildcards_Class(T type) {
 		this.type = type;
 	}
 	public void display() {
@@ -17,15 +33,15 @@ class GenericWildcards_C<T> {
 }
 
 class GenericWildcards_Wildcards {
-	public static void extendsNumber(GenericWildcards_C<? extends Number> src) {
+	public static void extendsNumber(GenericWildcards_Class<? extends Number> src) {
 		//Number를 상속받는 클래스
 		src.display();
 	}
-	public static void superNumber(GenericWildcards_C<? super Number> src) {
+	public static void superNumber(GenericWildcards_Class<? super Number> src) {
 		//Number보다 상위클래스
 		src.display();
 	}
-	public static void unbounded(GenericWildcards_C<?> src) {
+	public static void unbounded(GenericWildcards_Class<?> src) {
 		//입력하는 타입에 따라
 		src.display();
 	}
@@ -34,27 +50,35 @@ class GenericWildcards_Wildcards {
 public class GenericWildcards {
 	public static void main(String[] ar) {
 		Integer x = new Integer(100);
-		GenericWildcards_C<Integer> myType_01 = new GenericWildcards_C<>(x);
-		
 		Double y = new Double(200);
-		GenericWildcards_C<Number> myType_02 = new GenericWildcards_C<>(y);
-		
 		StringBuilder z = new StringBuilder("Hello Generic!");
-		GenericWildcards_C<StringBuilder> myType_03 = new GenericWildcards_C<>(z);
 		
+		GenericWildcards_Class<Integer> myType_01 = new GenericWildcards_Class<>(x);
+		GenericWildcards_Class<Number> myType_02 = new GenericWildcards_Class<>(y);
+		GenericWildcards_Class<StringBuilder> myType_03 = new GenericWildcards_Class<>(z);
+
+		System.out.println("1.extendsNumber");
 		GenericWildcards_Wildcards.extendsNumber(myType_01);
 		GenericWildcards_Wildcards.extendsNumber(myType_02);
 		//GenericWildcards_Wildcards.extendsNumber(myType_03); 
-		// Compile Error (X) -> Number를 상속받는 클래스가 아님
+		//Compile Error (X) -> Number를 상속받는 클래스가 아님
+		System.out.println("");
 		
+
+		System.out.println("2.superNumber");
 		//GenericWildcards_Wildcards.superNumber(myType_01); 
-		// Compile Error (X) -> Number보다 상위클래스가 아님
+		//Compile Error (X) -> Number보다 상위클래스가 아님
 		GenericWildcards_Wildcards.superNumber(myType_02);
 		//GenericWildcards_Wildcards.superNumber(myType_03); 
-		// Compile Error (X) -> Number보다 상위클래스가 아님
+		//Compile Error (X) -> Number보다 상위클래스가 아님
+		System.out.println("");
 		
+
+		System.out.println("3.unbounded");
 		GenericWildcards_Wildcards.unbounded(myType_01);
 		GenericWildcards_Wildcards.unbounded(myType_02);
 		GenericWildcards_Wildcards.unbounded(myType_03);
+		System.out.println("");
+
 	}
 }
